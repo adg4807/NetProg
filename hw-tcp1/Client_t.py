@@ -2,15 +2,14 @@ import socket
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 addr = ('localhost', 9000)
-
 sock.connect(addr)
-msg = sock.recv(1024)
-print(msg.decode()) 
 
-name = "Lee Jeong Ah"
+
+name = "Jeong Ah Lee"
 sock.send(name.encode())
 
-student_id = sock.recv(1024)
-print("Received student ID:", student_id.decode())
+data = sock.recv(4)  
+student_id = int.from_bytes(data, byteorder='big')
+print("Received student ID:", student_id)
 
 sock.close()
