@@ -6,14 +6,13 @@ s.listen(2)
 
 while True:
     client, addr = s.accept()
-    print('Connection from', addr)
-
-    client.send(b'Hello ' + addr[0].encode())
+    print('Connection from ', addr)
+    
     student_name = client.recv(1024).decode()
-    
-    print("Received student name:", student_name)
-    
-    student_id = "20221302"
-    client.send(student_id.encode())
+    print("Student name:", student_name)
 
+    student_id = 20221302
+
+    client.send(student_id.to_bytes(4, byteorder='big'))
+    
     client.close()
